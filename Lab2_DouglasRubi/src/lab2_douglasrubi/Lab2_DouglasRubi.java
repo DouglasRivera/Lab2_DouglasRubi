@@ -6,6 +6,8 @@
 package lab2_douglasrubi;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -23,7 +25,7 @@ public class Lab2_DouglasRubi {
         ArrayList<Detective> detectives = new ArrayList();
         ArrayList<Caso> casos = new ArrayList();
         int Opcion = 0;
-        while (Opcion != 6) {
+        while (Opcion != 7) {
 
             System.out.println("•••   Menu  ••• ");
             System.out.println("1. •Administrar detectives");
@@ -31,8 +33,8 @@ public class Lab2_DouglasRubi {
             System.out.println("3. •Listar casos");
             System.out.println("4. •Listar detectives");
             System.out.println("5. •Listar casos resueltos");
-            System.out.println("6. •Listar casos resueltos");
-            System.out.println("7.•Salir del programa");
+            System.out.println("6. •Listar casos proceso");
+            System.out.println("7. •Salir del programa");
             System.out.print("Ingrese la opcion deseada: ");
             Opcion = Leer.nextInt();
             switch (Opcion) {
@@ -100,6 +102,28 @@ public class Lab2_DouglasRubi {
                                 }
                             }
                             if (posicionEliminar >= 0) {
+                                Collections.sort(detectives, new Comparator<Detective>() {
+
+                                    @Override
+                                    public int compare(Detective p1, Detective p2) {
+                                        return new Integer(p1.getNivel()).compareTo(new Integer(p2.getNivel()));
+                                    }
+                                });
+                                ArrayList<Caso> homicidios = new ArrayList<>();
+                                ArrayList<Caso> robos = new ArrayList<>();
+                                ArrayList<Caso> secuestros = new ArrayList<>();
+                                for (int i = 0; i < detectives.get(posicionEliminar).casos.size(); i++) {
+                                    if (detectives.get(posicionEliminar).casos.get(i).tipo.equals("Homicidio")) {
+                                        homicidios.add(detectives.get(posicionEliminar).casos.get(i));
+                                    } else if (detectives.get(posicionEliminar).casos.get(i).tipo.equals("Secuestro")) {
+                                        secuestros.add(detectives.get(posicionEliminar).casos.get(i));
+                                    } else {
+                                        robos.add(detectives.get(posicionEliminar).casos.get(i));
+                                    }
+                                }
+                                detectives.get(0).casos.addAll(homicidios);
+                                detectives.get(1).casos.addAll(secuestros);
+                                detectives.get(detectives.size() - 1).casos.addAll(robos);
                                 detectives.remove(posicionEliminar);
                                 System.out.println("El detetctive se elimino");
                             } else {
@@ -123,51 +147,51 @@ public class Lab2_DouglasRubi {
                             System.out.println("Ingrese la descripción: ");
                             String Descripcion = Leer.next();
                             int tipoCaso = 0;
-                                    System.out.println("Ingrese la opción de caso: \n1. Homicidio\n 2. Robo\n 3. Secuestro):  ");
-                                    tipoCaso = Leer.nextInt();
-                                    String Tipo = "";
-                                    switch (tipoCaso) {
-                                        case 1:
-                                            Tipo = "Homicidio";
-                                            break;
-                                        case 2:
-                                            Tipo = "Robo";
-                                            break;
-                                        case 3:
-                                            Tipo = "Secuestro";
-                                            break;
-                                        default:
-                                            Tipo = "Homicidio";
-                                            break;
-                                    }
-                                    System.out.println("Ingrese el detective: ");
-                                    int numeroDetective = -1;
-                                    for (int j = 0; j < detectives.size(); j++) {
-                                        System.out.println((j+1)+" " + detectives.get(j).nombre + " nivel " + detectives.get(j).nivel);
-                                    }
-                                    numeroDetective = Leer.nextInt();
-                                    Detective detective = detectives.get(numeroDetective-1);
-                                    System.out.println("Ingrese el estado: ");
-                                    int estado = 0;
-                                    System.out.println("Ingrese la opción de estado del  caso: \n1. Proceso\n 2. Resuelto:  ");
-                                    estado = Leer.nextInt();
-                                    String Estado = "";
-                                    switch (estado) {
-                                        case 1:
-                                            Estado = "Proceso";
-                                            break;
-                                        case 2:
-                                            Estado = "Resuelto";
-                                            break;
-                                        default:
-                                            Estado = "Proceso";
-                                            break;
-                                    }
-                            
+                            System.out.println("Ingrese la opción de caso: \n1. Homicidio\n 2. Robo\n 3. Secuestro):  ");
+                            tipoCaso = Leer.nextInt();
+                            String Tipo = "";
+                            switch (tipoCaso) {
+                                case 1:
+                                    Tipo = "Homicidio";
+                                    break;
+                                case 2:
+                                    Tipo = "Robo";
+                                    break;
+                                case 3:
+                                    Tipo = "Secuestro";
+                                    break;
+                                default:
+                                    Tipo = "Homicidio";
+                                    break;
+                            }
+                            System.out.println("Ingrese el detective: ");
+                            int numeroDetective = -1;
+                            for (int j = 0; j < detectives.size(); j++) {
+                                System.out.println((j + 1) + " " + detectives.get(j).nombre + " nivel " + detectives.get(j).nivel);
+                            }
+                            numeroDetective = Leer.nextInt();
+                            Detective detective = detectives.get(numeroDetective - 1);
+                            System.out.println("Ingrese el estado: ");
+                            int estado = 0;
+                            System.out.println("Ingrese la opción de estado del  caso: \n1. Proceso\n 2. Resuelto:  ");
+                            estado = Leer.nextInt();
+                            String Estado = "";
+                            switch (estado) {
+                                case 1:
+                                    Estado = "Proceso";
+                                    break;
+                                case 2:
+                                    Estado = "Resuelto";
+                                    break;
+                                default:
+                                    Estado = "Proceso";
+                                    break;
+                            }
+
                             Caso caso = new Caso(Lugar, Descripcion, Tipo, detective, Estado);
                             casos.add(caso);
                             for (int i = 0; i < detectives.size(); i++) {
-                                if(detectives.get(i).nombre.equals(detective.nombre)){
+                                if (detectives.get(i).nombre.equals(detective.nombre)) {
                                     detectives.get(i).casos.add(caso);
                                 }
                             }
@@ -205,10 +229,10 @@ public class Lab2_DouglasRubi {
                                     System.out.println("Ingrese el detective: ");
                                     numeroDetective = -1;
                                     for (int j = 0; j < detectives.size(); j++) {
-                                        System.out.println((j+1)+" " + detectives.get(j).nombre + " nivel " + detectives.get(j).nivel);
+                                        System.out.println((j + 1) + " " + detectives.get(j).nombre + " nivel " + detectives.get(j).nivel);
                                     }
                                     numeroDetective = Leer.nextInt();
-                                    Detective detectiveActualizar = detectives.get(numeroDetective-1);
+                                    Detective detectiveActualizar = detectives.get(numeroDetective - 1);
                                     System.out.println("Ingrese el estado: ");
                                     estado = 0;
                                     System.out.println("Ingrese la opción de estado del  caso: \n1. Proceso\n 2. Resuelto:  ");
@@ -255,6 +279,103 @@ public class Lab2_DouglasRubi {
                             }
                             break;
                     }
+                    break;
+                case 3:
+                    System.out.println("Detectives");
+                    for (int i = 0; i < detectives.size(); i++) {
+                        System.out.println("Nombre: " + detectives.get(i).nombre);
+                        System.out.println("Edad: " + detectives.get(i).edad);
+                        System.out.println("Nacionalidad: " + detectives.get(i).nacionalidad);
+                        System.out.println("Años : " + detectives.get(i).aniosLaborales);
+                        System.out.println("Nivel: " + detectives.get(i).nivel);
+                    }
+                    break;
+                case 4:
+                    ArrayList<Caso> homicidios1 = new ArrayList<>();
+                    ArrayList<Caso> robos1 = new ArrayList<>();
+                    ArrayList<Caso> secuestros1 = new ArrayList<>();
+                    for (int i = 0; i < casos.size(); i++) {
+                        if (casos.get(i).tipo.equals("Homicidio")) {
+                            homicidios1.add(casos.get(i));
+                        } else if (casos.get(i).tipo.equals("Secuestro")) {
+                            secuestros1.add(casos.get(i));
+                        } else {
+                            robos1.add(casos.get(i));
+                        }
+                    }
+                    for (int i = 0; i < homicidios1.size(); i++) {
+                        
+                    }
+                    for (int i = 0; i < secuestros1.size(); i++) {
+                        
+                    }
+                    for (int i = 0; i < robos1.size(); i++) {
+                           
+                    }
+                    break;
+                case 5:
+                    ArrayList<Caso> homicidios2 = new ArrayList<>();
+                    ArrayList<Caso> robos2 = new ArrayList<>();
+                    ArrayList<Caso> secuestros2 = new ArrayList<>();
+                    for (int i = 0; i < casos.size(); i++) {
+                        if (casos.get(i).tipo.equals("Homicidio")) {
+                            homicidios2.add(casos.get(i));
+                        } else if (casos.get(i).tipo.equals("Secuestro")) {
+                            secuestros2.add(casos.get(i));
+                        } else {
+                            robos2.add(casos.get(i));
+                        }
+                    }
+                    for (int i = 0; i < homicidios2.size(); i++) {
+                        // imprime
+                        // comprara el estado si esta en proceso o resuelto
+                        if (homicidios2.get(i).estado.equals("Resuelto")) {
+
+                        }
+
+                    }
+                    for (int i = 0; i < secuestros2.size(); i++) {
+                        String arg = args[i];
+
+                    }
+                    for (int i = 0; i < robos2.size(); i++) {
+                        String arg = args[i];
+
+                    }
+                    break;
+                case 6:
+                    ArrayList<Caso> homicidios3 = new ArrayList<>();
+                    ArrayList<Caso> robos3 = new ArrayList<>();
+                    ArrayList<Caso> secuestros3 = new ArrayList<>();
+                    for (int i = 0; i < casos.size(); i++) {
+                        if (casos.get(i).tipo.equals("Homicidio")) {
+                            homicidios3.add(casos.get(i));
+                        } else if (casos.get(i).tipo.equals("Secuestro")) {
+                            secuestros3.add(casos.get(i));
+                        } else {
+                            robos3.add(casos.get(i));
+                        }
+                    }
+                    for (int i = 0; i < homicidios3.size(); i++) {
+                        // imprime
+                        // comprara el estado si esta en proceso o resuelto
+                        if (homicidios3.get(i).estado.equals("Proceso")) {
+
+                        }
+                    }
+                    for (int i = 0; i < secuestros3.size(); i++) {
+                        String arg = args[i];
+
+                    }
+                    for (int i = 0; i < robos3.size(); i++) {
+                        String arg = args[i];
+
+                    }
+                    break;
+                case 7:
+                    System.out.println("Saliendo......");
+                default:
+
                     break;
             }
         }
