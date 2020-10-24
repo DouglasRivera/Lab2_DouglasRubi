@@ -304,13 +304,25 @@ public class Lab2_DouglasRubi {
                         }
                     }
                     for (int i = 0; i < homicidios1.size(); i++) {
-                        
+                           System.out.println(homicidios1.get(i).lugar);
+                           System.out.println(homicidios1.get(i).descripcion);
+                           System.out.println(homicidios1.get(i).tipo);
+                           System.out.println(homicidios1.get(i).detective);
+                           System.out.println(homicidios1.get(i).estado);
                     }
                     for (int i = 0; i < secuestros1.size(); i++) {
-                        
+                           System.out.println(secuestros1.get(i).lugar);
+                           System.out.println(secuestros1.get(i).descripcion);
+                           System.out.println(secuestros1.get(i).tipo);
+                           System.out.println(secuestros1.get(i).detective);
+                           System.out.println(secuestros1.get(i).estado);
                     }
                     for (int i = 0; i < robos1.size(); i++) {
-                           
+                           System.out.println(robos1.get(i).lugar);
+                           System.out.println(robos1.get(i).descripcion);
+                           System.out.println(robos1.get(i).tipo);
+                           System.out.println(robos1.get(i).detective);
+                           System.out.println(robos1.get(i).estado);
                     }
                     break;
                 case 5:
@@ -325,22 +337,36 @@ public class Lab2_DouglasRubi {
                         } else {
                             robos2.add(casos.get(i));
                         }
-                    }
+                    }// imprime
+                    // comprara el estado si esta en proceso o resuelto
                     for (int i = 0; i < homicidios2.size(); i++) {
-                        // imprime
-                        // comprara el estado si esta en proceso o resuelto
                         if (homicidios2.get(i).estado.equals("Resuelto")) {
-
+                           System.out.println(homicidios2.get(i).lugar);
+                           System.out.println(homicidios2.get(i).descripcion);
+                           System.out.println(homicidios2.get(i).tipo);
+                           System.out.println(homicidios2.get(i).detective);
+                           System.out.println(homicidios2.get(i).estado);
                         }
 
                     }
                     for (int i = 0; i < secuestros2.size(); i++) {
-                        String arg = args[i];
+                        if (secuestros2.get(i).estado.equals("Resuelto")) {
+                           System.out.println(secuestros2.get(i).lugar);
+                           System.out.println(secuestros2.get(i).descripcion);
+                           System.out.println(secuestros2.get(i).tipo);
+                           System.out.println(secuestros2.get(i).detective);
+                           System.out.println(secuestros2.get(i).estado);
+                        }
 
                     }
                     for (int i = 0; i < robos2.size(); i++) {
-                        String arg = args[i];
-
+                        if (robos2.get(i).estado.equals("Resuelto")) {
+                           System.out.println(robos2.get(i).lugar);
+                           System.out.println(robos2.get(i).descripcion);
+                           System.out.println(robos2.get(i).tipo);
+                           System.out.println(robos2.get(i).detective);
+                           System.out.println(robos2.get(i).estado);
+                        }
                     }
                     break;
                 case 6:
@@ -360,16 +386,31 @@ public class Lab2_DouglasRubi {
                         // imprime
                         // comprara el estado si esta en proceso o resuelto
                         if (homicidios3.get(i).estado.equals("Proceso")) {
-
+                           System.out.println(homicidios3.get(i).lugar);
+                           System.out.println(homicidios3.get(i).descripcion);
+                           System.out.println(homicidios3.get(i).tipo);
+                           System.out.println(homicidios3.get(i).detective);
+                           System.out.println(homicidios3.get(i).estado);
                         }
                     }
                     for (int i = 0; i < secuestros3.size(); i++) {
-                        String arg = args[i];
+                        if (secuestros3.get(i).estado.equals("Proceso")) {
+                           System.out.println(secuestros3.get(i).lugar);
+                           System.out.println(secuestros3.get(i).descripcion);
+                           System.out.println(secuestros3.get(i).tipo);
+                           System.out.println(secuestros3.get(i).detective);
+                           System.out.println(secuestros3.get(i).estado);
+                        }
 
                     }
                     for (int i = 0; i < robos3.size(); i++) {
-                        String arg = args[i];
-
+                        if (robos3.get(i).estado.equals("Proceso")) {
+                           System.out.println(robos3.get(i).lugar);
+                           System.out.println(robos3.get(i).descripcion);
+                           System.out.println(robos3.get(i).tipo);
+                           System.out.println(robos3.get(i).detective);
+                           System.out.println(robos3.get(i).estado);
+                        }
                     }
                     break;
                 case 7:
